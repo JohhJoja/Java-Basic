@@ -30,7 +30,7 @@ public class IFStatement {
 
     }
 
-    static void ComplexFunction(int x, int y, int z){
+    static void ComplexFunction(int x, int y){
         String mode = "";
         while (true) {
             Scanner scan = new Scanner(System.in);
@@ -38,8 +38,17 @@ public class IFStatement {
             mode = (scan.nextLine()).toLowerCase();
 
             if (mode.equals("eae")){
-                System.out.println("EAE");
+
+                System.out.println("Z=(A^-1)mod(N)");
+                int inverse = modInverse(x,y);
+                if (inverse == -1) {
+                    System.out.println("Обратного элемента не существует");
+                } else {
+                    System.out.println("Обратный элемент: " + inverse);
+                }
+
                 break;
+
             } else if (mode.equals("qs")) {
                 System.out.println("SQ");
                 break;
@@ -47,6 +56,28 @@ public class IFStatement {
                 System.out.println(":(");
             }
         }
+    }
 
+    public static int modInverse(int A, int N) {
+        int[] result = extendedGCD(A, N);
+        int gcd = result[0];
+        int x = result[1];
+
+        if (gcd != 1) {
+            return -1; // Обратного элемента не существует
+        } else {
+            return (x % N + N) % N; // Приводим к положительному значению
+        }
+    }
+
+    public static int[] extendedGCD(int a, int b) {
+        if (b == 0) {
+            return new int[]{a, 1, 0};
+        }
+        int[] result = extendedGCD(b, a % b);
+        int gcd = result[0];
+        int x1 = result[2];
+        int y1 = result[1] - (a / b) * result[2];
+        return new int[]{gcd, x1, y1};
     }
 }
