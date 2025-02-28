@@ -26,10 +26,6 @@ public class IFStatement {
         System.out.println("x*y= "+z);
     }
 
-    void ComplexFunction(String mode){
-
-    }
-
     static void ComplexFunction(int x, int y){
         String mode = "";
         while (true) {
@@ -50,7 +46,9 @@ public class IFStatement {
                 break;
 
             } else if (mode.equals("qs")) {
-                System.out.println("SQ");
+                System.out.println("Enter N");
+                System.out.println("(A^b) mod N= "+ fastExponentiation(x,y, (new Scanner(System.in).nextLong())));
+
                 break;
             } else{
                 System.out.println(":(");
@@ -79,5 +77,16 @@ public class IFStatement {
         int x1 = result[2];
         int y1 = result[1] - (a / b) * result[2];
         return new int[]{gcd, x1, y1};
+    }
+    public static long fastExponentiation(long base, long exp, long mod) {
+        long result = 1;
+        while (exp > 0) {
+            if ((exp & 1) == 1) {
+                result = (result * base) % mod;
+            }
+            base = (base * base) % mod;
+            exp >>= 1;
+        }
+        return result;
     }
 }
