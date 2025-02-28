@@ -47,6 +47,6 @@ public class IFStatement {
                 System.out.println(":(");
             }
         }
-
     }
+
 }
