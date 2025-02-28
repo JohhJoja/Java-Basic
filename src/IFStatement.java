@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class IFStatement {
     int x,y,z;
 
@@ -24,5 +26,27 @@ public class IFStatement {
         System.out.println("x*y= "+z);
     }
 
+    void ComplexFunction(String mode){
 
+    }
+
+    static void ComplexFunction(int x, int y, int z){
+        String mode = "";
+        while (true) {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Select mode: EAE or QS ");
+            mode = (scan.nextLine()).toLowerCase();
+
+            if (mode.equals("eae")){
+                System.out.println("EAE");
+                break;
+            } else if (mode.equals("qs")) {
+                System.out.println("SQ");
+                break;
+            } else{
+                System.out.println(":(");
+            }
+        }
+
+    }
 }
