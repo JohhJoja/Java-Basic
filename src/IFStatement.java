@@ -26,11 +26,7 @@ public class IFStatement {
         System.out.println("x*y= "+z);
     }
 
-    void ComplexFunction(String mode){
-
-    }
-
-    static void ComplexFunction(int x, int y, int z){
+    static void ComplexFunction(int x, int y){
         String mode = "";
         while (true) {
             Scanner scan = new Scanner(System.in);
@@ -38,10 +34,20 @@ public class IFStatement {
             mode = (scan.nextLine()).toLowerCase();
 
             if (mode.equals("eae")){
-                System.out.println("EAE");
+
+                System.out.println("Z=(A^-1)mod(N)");
+                int inverse = modInverse(x,y);
+                if (inverse == -1) {
+                    System.out.println("Обратного элемента не существует");
+                } else {
+                    System.out.println("Обратный элемент: " + inverse);
+                }
+
                 break;
             } else if (mode.equals("qs")) {
-                System.out.println("SQ");
+                System.out.println("Enter N");
+                System.out.println("(A^b) mod N= "+ fastExponentiation(x,y, (new Scanner(System.in).nextLong())));
+
                 break;
             } else{
                 System.out.println(":(");
@@ -49,4 +55,37 @@ public class IFStatement {
         }
     }
 
+    public static int modInverse(int A, int N) {
+        int[] result = extendedGCD(A, N);
+        int gcd = result[0];
+        int x = result[1];
+
+        if (gcd != 1) {
+            return -1; // Обратного элемента не существует
+        } else {
+            return (x % N + N) % N; // Приводим к положительному значению
+        }
+    }
+
+    public static int[] extendedGCD(int a, int b) {
+        if (b == 0) {
+            return new int[]{a, 1, 0};
+        }
+        int[] result = extendedGCD(b, a % b);
+        int gcd = result[0];
+        int x1 = result[2];
+        int y1 = result[1] - (a / b) * result[2];
+        return new int[]{gcd, x1, y1};
+    }
+    public static long fastExponentiation(long base, long exp, long mod) {
+        long result = 1;
+        while (exp > 0) {
+            if ((exp & 1) == 1) {
+                result = (result * base) % mod;
+            }
+            base = (base * base) % mod;
+            exp >>= 1;
+        }
+        return result;
+    }
 }

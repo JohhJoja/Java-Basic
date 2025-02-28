@@ -45,7 +45,7 @@ public class Interface extends JFrame implements ActionListener {
             y = Integer.parseInt(JOptionPane.showInputDialog("Enter int"));
         } else if (e.getSource()==commit) {
             mode = (String) combo.getSelectedItem();
-            IFStatement.ComplexFunction(x,y,mode);
+            IFStatement.ComplexFunction(x,y);
         }
     }
 }

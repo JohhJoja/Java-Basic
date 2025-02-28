@@ -4,6 +4,7 @@ public class Main {
       //  IFStatement.ComplexFunction(10,10,10);
 
         new Interface();
+        IFStatement.ComplexFunction(10,10);
 
     }
 }
