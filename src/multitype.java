@@ -1,4 +1,9 @@
-package PACKAGE_NAME;
+public class multitype <T,U extends Number> {
+    T item;
+    U price;
 
-public class multitype {
+    multitype(T item, U price){
+        this.item = item;
+        this.price = price;
+    }
 }
